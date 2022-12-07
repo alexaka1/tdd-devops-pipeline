@@ -55,7 +55,12 @@ jobs:
   #     command: 'custom'
   #     workingDir: '$(packagejson)'
   #     customCommand: 'run test -- --watch=false --progress=false'
-  - script: robocopy.exe Proto.App/client-app/src $(Build.ArtifactStagingDirectory)/wwwroot /mt:4 /e /z
+  #- script: robocopy.exe Proto.App/client-app/src $(Build.ArtifactStagingDirectory)/wwwroot /mt:4 /e /z
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: 'Proto.App/client-app/src'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/wwwroot'
     # inputs:
     #   #SourcePath: 'Proto.App/client-app/dist/client-app/'
     #   SourcePath: 'Proto.App/client-app/src/index.html'
