@@ -29,18 +29,18 @@ steps:
 #     testRunTitle: 'Unit tests'
 #- job: angular
  # steps:
-- task: Npm@1
-  displayName: 'npm install'
-  inputs:
-    command: 'custom'
-    workingDir: '$(packagejson)'
-    customCommand: 'ci'
-- task: Npm@1
-  displayName: 'npm build'
-  inputs:
-    command: 'custom'
-    workingDir: '$(packagejson)'
-    customCommand: 'run build'
+# - task: Npm@1
+#   displayName: 'npm install'
+#   inputs:
+#     command: 'custom'
+#     workingDir: '$(packagejson)'
+#     customCommand: 'ci'
+# - task: Npm@1
+#   displayName: 'npm build'
+#   inputs:
+#     command: 'custom'
+#     workingDir: '$(packagejson)'
+#     customCommand: 'run build'
 - task: Npm@1
   displayName: 'npm test'
   inputs:
