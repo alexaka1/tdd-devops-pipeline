@@ -41,9 +41,9 @@ steps:
     command: 'custom'
     workingDir: '$(packagejson)'
     customCommand: 'run build'
-  # - task: Npm@1
-  #   displayName: 'npm test'
-  #   inputs:
-  #     command: 'custom'
-  #     workingDir: '$(packagejson)'
-  #     customCommand: 'run test -- --watch=false --progress=false'
+- task: Npm@1
+  displayName: 'npm test'
+  inputs:
+    command: 'custom'
+    workingDir: '$(packagejson)'
+    customCommand: 'run test -- --watch=false --progress=false'
