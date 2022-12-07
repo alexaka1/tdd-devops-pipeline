@@ -20,7 +20,7 @@ steps:
   displayName: 'Unit tests task'
   inputs:
     command: 'test'
-    #arguments: '--configuration $(buildConfiguration)'
-    configuration: ' $(buildConfiguration)'
+    arguments: '--configuration $(buildConfiguration)'
+    #configuration: ' $(buildConfiguration)'
     projects: '$(solution)'
     testRunTitle: 'Unit tests'
