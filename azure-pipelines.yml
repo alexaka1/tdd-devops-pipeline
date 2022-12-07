@@ -16,31 +16,31 @@ variables:
 
 #jobs:
 #- job: dotnet
-  steps:
-  - script: dotnet build --configuration $(buildConfiguration)
-    displayName: 'dotnet build $(buildConfiguration)'
-  - task: DotNetCoreCLI@2
-    displayName: 'Unit tests task'
-    inputs:
-      command: 'test'
-      arguments: '--configuration $(buildConfiguration)'
-      #configuration: ' $(buildConfiguration)'
-      projects: '$(solution)'
-      testRunTitle: 'Unit tests'
+steps:
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: 'Unit tests task'
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration)'
+    #configuration: ' $(buildConfiguration)'
+    projects: '$(solution)'
+    testRunTitle: 'Unit tests'
 #- job: angular
  # steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      command: 'custom'
-      workingDir: '$(packagejson)'
-      customCommand: 'ci'
-  - task: Npm@1
-    displayName: 'npm build'
-    inputs:
-      command: 'custom'
-      workingDir: '$(packagejson)'
-      customCommand: 'run build'
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    command: 'custom'
+    workingDir: '$(packagejson)'
+    customCommand: 'ci'
+- task: Npm@1
+  displayName: 'npm build'
+  inputs:
+    command: 'custom'
+    workingDir: '$(packagejson)'
+    customCommand: 'run build'
   # - task: Npm@1
   #   displayName: 'npm test'
   #   inputs:
