@@ -59,6 +59,7 @@ jobs:
     inputs:
       SourcePath: 'Proto.App/client-app/dist/client-app/'
       TargetPath: '$(Build.ArtifactStagingDirectory)/wwwroot'
+      MachineNames: 'localhost'
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
