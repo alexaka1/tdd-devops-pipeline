@@ -55,14 +55,14 @@ jobs:
   #     command: 'custom'
   #     workingDir: '$(packagejson)'
   #     customCommand: 'run test -- --watch=false --progress=false'
-  - task: WindowsMachineFileCopy@2
-    inputs:
-      #SourcePath: 'Proto.App/client-app/dist/client-app/'
-      SourcePath: 'Proto.App/client-app/src/index.html'
-      TargetPath: '$(Build.ArtifactStagingDirectory)/wwwroot'
-      MachineNames: ''
-      AdminUserName: '' # string. Required. Admin Login. 
-      AdminPassword: ''
+  - script: robocopy.exe 'Proto.App/client-app/src/index.html' '$(Build.ArtifactStagingDirectory)/wwwroot' /mt:4
+    # inputs:
+    #   #SourcePath: 'Proto.App/client-app/dist/client-app/'
+    #   SourcePath: 'Proto.App/client-app/src/index.html'
+    #   TargetPath: '$(Build.ArtifactStagingDirectory)/wwwroot'
+    #   MachineNames: ''
+    #   AdminUserName: '' # string. Required. Admin Login. 
+    #   AdminPassword: ''
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
