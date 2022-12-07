@@ -5,17 +5,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- mas
-  - script: dotnet build --configuration $(buildConfiguration)
-    displayName: 'dotnet build $(buildConfiguration)'
-  - task: DotNetCoreCLI@2
-    displayName: 'Unit tests task'
-    inputs:
-      command: 'test'
-      arguments: '--configuration $(buildConfiguration)'
-      #configuration: ' $(buildConfiguration)'ter
-
-
+- master
 
 variables:
   buildConfiguration: 'Release'
@@ -28,12 +18,23 @@ jobs:
   steps:
   - checkout: self
     clean: 'false'
+  - script: dotnet build --configuration $(buildConfiguration)
+    displayName: 'dotnet build $(buildConfiguration)'
+  - task: DotNetCoreCLI@2
+    displayName: 'Unit tests task'
+    inputs:
+      command: 'test'
+      arguments: '--configuration $(buildConfiguration)'
+      #configuration: ' $(buildConfiguration)'ter
       projects: '$(solution)'
       testRunTitle: 'Unit tests'
+
 - job: angular
   #dependsOn: dotnet
   pool: 'Default'
   steps:
+  - checkout: self
+    clean: 'false'
   - task: Npm@1
     displayName: 'npm install'
     inputs:
