@@ -20,5 +20,6 @@ steps:
   displayName: 'Unit tests task'
   inputs:
     command: 'test'
+    arguments: '--configuration $(buildConfiguration)'
     projects: '$(solution)'
     testRunTitle: 'Unit tests'
