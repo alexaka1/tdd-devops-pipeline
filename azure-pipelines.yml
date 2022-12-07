@@ -14,11 +14,12 @@ variables:
 
 jobs:
 - job: dotnet
+  dependsOn: angular
   pool: 'Default'
   steps:
   - checkout: self
-    clean: 'false'
-  - script: dotnet build --configuration $(buildConfiguration)
+    clean: 'true'
+  - script: dotnet build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
     displayName: 'dotnet build $(buildConfiguration)'
   - task: DotNetCoreCLI@2
     displayName: 'Unit tests task'
@@ -29,12 +30,12 @@ jobs:
       projects: '$(solution)'
       testRunTitle: 'Unit tests'
 
-- job: angular
-  #dependsOn: dotnet
-  pool: 'Default'
-  steps:
-  - checkout: self
-    clean: 'false'
+# - job: angular
+#   #dependsOn: dotnet
+#   pool: 'Default'
+#   steps:
+#   - checkout: self
+#     clean: 'false'
   - task: Npm@1
     displayName: 'npm install'
     inputs:
@@ -54,3 +55,13 @@ jobs:
       command: 'custom'
       workingDir: '$(packagejson)'
       customCommand: 'run test -- --watch=false --progress=false'
+  - task: WindowsMachineFileCopy@2
+    inputs:
+      SourcePath: 'Proto.App/client-app/dist/client-app/'
+      TargetPath: '$(Build.ArtifactStagingDirectory)/wwwroot'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
+  
