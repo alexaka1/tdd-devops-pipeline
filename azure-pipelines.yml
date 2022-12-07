@@ -11,6 +11,7 @@ pool: 'Default'
 
 variables:
   buildConfiguration: 'Release'
+  solution: 'Proto_0\Proto.sln'
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
