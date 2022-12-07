@@ -14,7 +14,7 @@ variables:
 
 jobs:
 - job: dotnet
-  dependsOn: angular
+  #dependsOn: angular
   pool: 'Default'
   steps:
   - checkout: self
