@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Proto.Api\Proto.Api.csproj" />
+    <ProjectReference Include="..\Proto.App\Proto.App.csproj" />
   </ItemGroup>
 
 </Project>
