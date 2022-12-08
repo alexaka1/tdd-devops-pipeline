@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Proto.App.Models;
 
 namespace Proto.App.Controllers
@@ -9,24 +10,25 @@ namespace Proto.App.Controllers
     public class UserController : ControllerBase
     {
 
+
         [HttpGet("")]
-        public IActionResult GetUsers()
+        public async Task<IActionResult> GetUsersAsync()
         {
-            return new JsonResult(Enumerable.Empty<User>().Append(new User()
-            {
-                FirstName = "Dill",
-                LastName = "Doe"
-            }));
+            using var context = new Proto.App.Context.ApppppppppppppppppppppContext();
+
+            return new JsonResult(await context.Users.ToListAsync());
         }
 
         [HttpGet("{id:int}")]
-        public IActionResult GetUser(int id)
+        public async Task<IActionResult> GetUser(int id)
         {
-            return new JsonResult((new User()
+            using var context = new Proto.App.Context.ApppppppppppppppppppppContext();
+            var user = await context.Users.SingleOrDefaultAsync(x=> x.Id == id);
+            if(user == null)
             {
-                FirstName = "Dill",
-                LastName = "Doe"
-            }));
+                return NotFound();
+            }
+            return new JsonResult(user);
         }
     }
 }
