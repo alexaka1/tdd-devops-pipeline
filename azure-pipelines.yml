@@ -27,29 +27,29 @@ jobs:
       arguments: '--configuration $(buildConfiguration)'
       projects: '$(solution)'
       testRunTitle: 'Unit tests'
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      command: 'custom'
-      workingDir: '$(packagejson)'
-      customCommand: 'install'
-  - task: Npm@1
-    displayName: 'npm build'
-    inputs:
-      command: 'custom'
-      workingDir: '$(packagejson)'
-      customCommand: 'run build'
-  - task: Npm@1
-    displayName: 'npm test'
-    inputs:
-      command: 'custom'
-      workingDir: '$(packagejson)'
-      customCommand: 'run test -- --watch=false --progress=false'
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: 'Proto.App/client-app/dist/client-app/'
-      Contents: '**'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)/wwwroot'
+  # - task: Npm@1
+  #   displayName: 'npm install'
+  #   inputs:
+  #     command: 'custom'
+  #     workingDir: '$(packagejson)'
+  #     customCommand: 'install'
+  # - task: Npm@1
+  #   displayName: 'npm build'
+  #   inputs:
+  #     command: 'custom'
+  #     workingDir: '$(packagejson)'
+  #     customCommand: 'run build'
+  # - task: Npm@1
+  #   displayName: 'npm test'
+  #   inputs:
+  #     command: 'custom'
+  #     workingDir: '$(packagejson)'
+  #     customCommand: 'run test -- --watch=false --progress=false'
+  # - task: CopyFiles@2
+  #   inputs:
+  #     SourceFolder: 'Proto.App/client-app/dist/client-app/'
+  #     Contents: '**'
+  #     TargetFolder: '$(Build.ArtifactStagingDirectory)/wwwroot'
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
