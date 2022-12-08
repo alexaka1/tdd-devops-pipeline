@@ -14,7 +14,6 @@ variables:
 
 jobs:
 - job: dotnet
-  #dependsOn: angular
   pool: 'Default'
   steps:
   - checkout: self
@@ -26,16 +25,8 @@ jobs:
     inputs:
       command: 'test'
       arguments: '--configuration $(buildConfiguration)'
-      #configuration: ' $(buildConfiguration)'ter
       projects: '$(solution)'
       testRunTitle: 'Unit tests'
-
-# - job: angular
-#   #dependsOn: dotnet
-#   pool: 'Default'
-#   steps:
-#   - checkout: self
-#     clean: 'false'
   - task: Npm@1
     displayName: 'npm install'
     inputs:
@@ -51,23 +42,14 @@ jobs:
   - task: Npm@1
     displayName: 'npm test'
     inputs:
-      #clean: false
       command: 'custom'
       workingDir: '$(packagejson)'
       customCommand: 'run test -- --watch=false --progress=false'
-  #- script: robocopy.exe Proto.App/client-app/src $(Build.ArtifactStagingDirectory)/wwwroot /mt:4 /e /z
   - task: CopyFiles@2
     inputs:
       SourceFolder: 'Proto.App/client-app/dist/client-app/'
       Contents: '**'
       TargetFolder: '$(Build.ArtifactStagingDirectory)/wwwroot'
-    # inputs:
-    #   #SourcePath: 'Proto.App/client-app/dist/client-app/'
-    #   SourcePath: 'Proto.App/client-app/src/index.html'
-    #   TargetPath: '$(Build.ArtifactStagingDirectory)/wwwroot'
-    #   MachineNames: ''
-    #   AdminUserName: '' # string. Required. Admin Login. 
-    #   AdminPassword: ''
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
