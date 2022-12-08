@@ -10,14 +10,23 @@ namespace Proto.App.Controllers
     {
 
         [HttpGet("")]
-        public IActionResult GetUser()
+        public IActionResult GetUsers()
         {
-            //return Ok();
-            return new JsonResult(new User()
+            return new JsonResult(Enumerable.Empty<User>().Append(new User()
             {
                 FirstName = "Dill",
                 LastName = "Doe"
-            });
+            }));
+        }
+
+        [HttpGet("{id:int}")]
+        public IActionResult GetUser(int id)
+        {
+            return new JsonResult((new User()
+            {
+                FirstName = "Dill",
+                LastName = "Doe"
+            }));
         }
     }
 }

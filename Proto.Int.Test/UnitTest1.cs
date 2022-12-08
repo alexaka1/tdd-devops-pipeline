@@ -6,12 +6,21 @@ namespace Proto.Int.Test
 {
     public class UnitTest1
     {
+
         [Fact]
-        public async Task Test1Async()
+        public async Task TestGetUsers()
         {
             await using var application = new WebApplicationFactory<Program>();
             using var client = application.CreateClient();
             var response = await client.GetAsync("/api/user");
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+        [Fact]
+        public async Task TestGetUser()
+        {
+            await using var application = new WebApplicationFactory<Program>();
+            using var client = application.CreateClient();
+            var response = await client.GetAsync("/api/user/1");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
     }
