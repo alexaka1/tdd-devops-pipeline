@@ -4,7 +4,7 @@ using System.Net;
 
 namespace Proto.Int.Test
 {
-    public class UnitTest1
+    public class IntegrationTest
     {
 
         [Fact]
